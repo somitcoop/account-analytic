@@ -3,13 +3,14 @@
     <record id="view_product_form_inherit" model="ir.ui.view">
         <field name="name">product.template.form.inherit.analytic.plan</field>
         <field name="model">product.template</field>
-        <field name="inherit_id" ref="account.product_template_form_view"/>
+        <field name="inherit_id" ref="sale_project.product_template_form_view_invoice_policy_inherit_sale_project"/>
         <field name="arch" type="xml">
-            <xpath expr="//page[@name='invoicing']" position="inside">
-                <group>
-                    <field name="analytic_plan_id"/>
-                </group>
-            </xpath>
+            <field name="project_template_id" position="after">
+                <field name="analytic_plan_id"
+                       attrs="{'invisible': ['|',
+                                          ('type', '!=', 'service'),
+                                          ('service_tracking', 'not in', ['task_in_project', 'project_only'])]}"/>
+            </field>
         </field>
     </record>
 </odoo>
