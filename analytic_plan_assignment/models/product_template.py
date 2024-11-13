@@ -9,6 +9,7 @@ class ProductTemplate(models.Model):
         "account.analytic.plan",
         string="Analytic Plan",
         help="When creating a project from this product, this analytic plan will be automatically "
-             "assigned to the project's analytic account. This is useful for automatically "
-             "categorizing and organizing your project's analytical accounting."
+        "assigned to the project's analytic account. This is useful for automatically "
+        "categorizing and organizing your project's analytical accounting.",
+        domain=lambda self: [("company_id", "in", [self.env.company.id, False])],
     )

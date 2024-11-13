@@ -7,8 +7,8 @@ class Project(models.Model):
 
     def _create_analytic_account(self):
         analytic_account = super()._create_analytic_account()
-
         if self.sale_line_id and self.sale_line_id.product_id.analytic_plan_id:
-            analytic_account.plan_id = self.sale_line_id.product_id.analytic_plan_id.id
-
+            plan = self.sale_line_id.product_id.analytic_plan_id
+            if plan.company_id == self.company_id or not plan.company_id:
+                analytic_account.plan_id = plan.id
         return analytic_account

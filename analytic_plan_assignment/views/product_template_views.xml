@@ -9,7 +9,8 @@
                 <field name="analytic_plan_id"
                        attrs="{'invisible': ['|',
                                           ('type', '!=', 'service'),
-                                          ('service_tracking', 'not in', ['task_in_project', 'project_only'])]}"/>
+                                          ('service_tracking', 'not in', ['task_in_project', 'project_only'])]}"
+                       domain="[('company_id', 'in', [current_company_id, False])]"/>
             </field>
         </field>
     </record>

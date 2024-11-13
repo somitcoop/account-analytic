@@ -11,6 +11,10 @@ class SaleOrder(models.Model):
         if self.order_line:
             product = self.order_line[0].product_id
             if product.analytic_plan_id:
-                result["plan_id"] = product.analytic_plan_id.id
+                if (
+                    product.analytic_plan_id.company_id == self.company_id
+                    or not product.analytic_plan_id.company_id
+                ):
+                    result["plan_id"] = product.analytic_plan_id.id
 
         return result
